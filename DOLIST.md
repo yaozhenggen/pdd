@@ -10,12 +10,12 @@
 
 ##商品管理系统
 ---
-+ 系统登陆绑定
-  + 用户分组权限
-    1.销售
-    2.客服
-    3.售后
-    4.总后台
++ 1.系统登陆绑定
+  + 1.2 用户分组权限
+     + 1.2.1 销售
+     + 1.2.2 客服
+     + 1.2.3 售后
+     + 1.2.4 总后台
   + 用户绑定表列
 + 接口对接功能封装
  + 扫码登陆接口封装
@@ -24,3 +24,33 @@
  + 库存(Skuid)控制管理
  + 销售统计
  + 物流管理
+
+
+##数据库表
+---
++ sys_user
+	+ id,username,password,token,time,tag,wslink
++ sys_sgb
+	+ id,pdd_id,other\_id,catid,skuid,title,pic,text,amount,money,time
++ sys_order
+	+ id,pdd_id,order\_id,goods\_id,dizi,address,phone,name,money,time
++ user_data
+	+ id,user,pass,token,cookie,header,ip,sys_user\_id,proxy\_id
++ user_address
+	+ id,user,address1,address2,address3
++ user_info
+	+ id,user,mallinfo,phone,company,
++ user_sum
+	+ id,time,money1,money2,money3,order_sum,vistor\_sum,percent,conversion
++ crawl_taobao
+	+ ...
++ crawl_jd
+	+ ...
++ taobao_catid
+	+ id,name,level
++ pdd_catid
+	+ id,name,level
++ chat_log
+	+ id,text,time,token,to_user,from\_user
++ proxy_ip
+	+ proxy_id,host,port,type
