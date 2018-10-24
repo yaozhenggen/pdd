@@ -24,7 +24,7 @@ func main() {
 	}
 }
 
-// connection is an middleman between the websocket connection and the hub.
+// connection is an middleman between the websocket connection and the hub.ssss
 type connection struct {
 	// The websocket connection.
 	ws *websocket.Conn
