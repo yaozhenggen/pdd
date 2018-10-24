@@ -10,7 +10,11 @@ import (
 )
 
 const (
+<<<<<<< HEAD
 	// Time allowed to write a message to the peer.sss
+=======
+	// Time allowed to write a message to the peer.
+>>>>>>> parent of 60af2af... no message
 	writeWait = 10 * time.Second
 
 	// Time allowed to read the next pong message from the peer.
