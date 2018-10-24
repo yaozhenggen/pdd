@@ -2,5 +2,30 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/PuerkitoBio/goquery" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/andybalholm/cascadia" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/antchfx/htmlquery" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/antchfx/xmlquery" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/antchfx/xpath" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/appengine" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/chromedp/cdproto" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/chromedp/chromedp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/colly" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/disintegration/imaging" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/gobwas/glob" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/gocolly/colly" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/golang/appengine" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/golang/protobuf" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/gorilla/websocket" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/hunterhug/GoTaoBao" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/kennygrant/sanitize" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/knq/sysutil" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/mailru/easyjson" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/saintfish/chardet" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/temoto/robotstxt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang.org/x/image" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang.org/x/net" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang.org/x/text" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/google.golang.org/appengine" vcs="Git" />
   </component>
 </project>

@@ -102,9 +102,3 @@ func (h *hub) run() {
 	}
 }
 
-type client struct {
-	access_token string
-	role         string
-	client       string
-	version      string
-}
