@@ -1,4 +1,4 @@
-##客服集成系统
+﻿##客服集成系统
 ---
 + websocket 协议对接
  +  消息发送入库
@@ -53,4 +53,4 @@
 + chat_log
 	+ id,text,time,token,to_user,from\_user
 + proxy_ip
-	+ proxy_id,host,port,type
+	+ proxy_id,host,port,type,,
