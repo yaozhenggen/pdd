@@ -51,6 +51,16 @@
 + pdd_catid
 	+ id,name,level
 + chat_log
-	+ id,text,time,token,to_user,from\_user
+	+ id,text,time,token,user,to_user,from\_user
 + proxy_ip
 	+ proxy_id,host,port,type
+
+##客服集成系统
+---
++ 业务流程
+	+ 拼多多服务器 > 后台控制端 > 服务器逻辑层 > 自封装协议 > 返回客户
++ 自定义简化封装协议
++ 控制器方法
+	+ 认证账号信息 > 查询获取token 表 > 并发开启长连维持 > 入库排序 | 接受数据发送
+
+
