@@ -2,12 +2,15 @@ package main
 
 import (
 	"./tool"
+	"bytes"
 	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
 )
+
+var relationClient = make(map[string][]*Client)
 
 const (
 	// Time allowed to write a message to the peer.
@@ -23,6 +26,24 @@ const (
 	maxMessageSize = 1024
 )
 
+// Client is an middleman between the websocket Client and the hub.ssss
+type Client struct {
+	hub *Hub
+	// The websocket Client.
+	ws *websocket.Conn
+	// Buffered channel of outbound messages.
+	send chan []byte
+	// request string
+	request map[string]string
+	//message
+	message []byte
+}
+
+var (
+	newline = []byte{'\n'}
+	space   = []byte{' '}
+)
+
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  8192,
 	WriteBufferSize: 8192,
@@ -31,35 +52,38 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-// readPump pumps messages from the websocket connection to the hub.
-func (c *connection) readPump() {
+// readPump pumps messages from the websocket Client to the hub.
+func (c *Client) readPump() {
 	defer func() {
-		h.unregister <- c
+		c.hub.unregister <- c
 		c.ws.Close()
 	}()
 	c.ws.SetReadLimit(maxMessageSize)
 	c.ws.SetReadDeadline(time.Now().Add(pongWait))
 	c.ws.SetPongHandler(func(string) error { c.ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
-		_, _, err := c.ws.ReadMessage()
+		_, message, err := c.ws.ReadMessage()
 		if err != nil {
-			//if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-			log.Printf("error: %v", err)
-			//}
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+				log.Printf("error: %v", err)
+			}
 			break
 		}
-		//h.broadcast <- message
+
+		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
+		c.message = message
+		c.hub.broadcast <- c
 	}
 }
 
 // write writes a message with the given message type and payload.
-func (c *connection) write(mt int, payload []byte) error {
+func (c *Client) write(mt int, payload []byte) error {
 	c.ws.SetWriteDeadline(time.Now().Add(writeWait))
 	return c.ws.WriteMessage(mt, payload)
 }
 
-// writePump pumps messages from the hub to the websocket connection.
-func (c *connection) writePump() {
+// writePump pumps messages from the hub to the websocket Client.
+func (c *Client) writePump() {
 	ticker := time.NewTicker(pingPeriod)
 	defer func() {
 		ticker.Stop()
@@ -103,15 +127,13 @@ func CheckValidate(request map[string]string, addrIp string) bool {
 }
 
 // serveWs handles websocket requests from the peer.
-func ServeWs(w http.ResponseWriter, r *http.Request) {
-	params := make(map[string]string)
-
-	r.ParseForm()
-	for k, v := range r.Form {
-		params[k] = v[0]
+func serveWs(w http.ResponseWriter, r *http.Request) {
+	var pddConn = make(map[string]string)
+	for k, v := range r.URL.Query() {
+		pddConn[k] = v[0]
 	}
 
-	ws, err := upgrader.Upgrade(w, r, nil)
+	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
@@ -119,15 +141,10 @@ func ServeWs(w http.ResponseWriter, r *http.Request) {
 	// login check
 	//if CheckValidate(request, ws.RemoteAddr().String()) {
 
-	// init a connection
-	c := &connection{send: make(chan []byte, 256), ws: ws, request: params}
-	h.register <- c
+	// init a Client
+	c := &Client{hub: clientHub, send: make(chan []byte, 256), ws: conn, request: pddConn}
+	c.hub.register <- c
 
 	go c.writePump()
 	go c.readPump()
-	//}
-}
-
-func OnReceive() {
-
 }
