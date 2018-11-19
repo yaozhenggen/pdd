@@ -30,7 +30,7 @@ func main() {
 
 	u := url.URL{Scheme: "ws", Host: *addr, Path: "/zkz"}
 	q := u.Query()
-	q.Set("access_token", "78bdbb9b6ec646270797cb190d302f3e")
+	q.Set("access_token", "85e994998df62483b75f83e1d466c553")
 	//q.Set("access_token", "f5f8dd26eabc134bb0194eee47031640")
 	q.Set("role", "mall_cs")
 	q.Set("client", "web")

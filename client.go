@@ -132,7 +132,6 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	for k, v := range r.URL.Query() {
 		pddConn[k] = v[0]
 	}
-
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)

@@ -9,7 +9,7 @@ import (
 	"./tool"
 )
 
-var dbInfo = []string{"localhost:3306", "root", "Mysql123", "zkz"}
+var dbInfo = []string{"localhost:3306", "root", "linjun0928", "zkz"}
 var addr = flag.String("addrs", ":8888", "service address")
 var pddaddr = flag.String("pdd", "m-ws.pinduoduo.com", "http service address")
 var pddHub = newHub()
